@@ -6,7 +6,7 @@
         <p class="text-amber-400 px-2">{{ getStars(film.note) }}</p>
       </RouterLink>
       <div class="flex flex-row justify-center w-5/6 mx-auto mt-3 bg-slate-800 rounded-xl">
-        <a @click="deleteFilm(film.id)" class="hover:bg-cyan-600 w-1/2 px-4 py-2 rounded-l-xl flex justify-center items-center cursor-pointer"><v-icon name="fa-pen"  /></a>
+        <a @click="deleteMovie(film.id)" class="hover:bg-cyan-600 w-1/2 px-4 py-2 rounded-l-xl flex justify-center items-center cursor-pointer"><v-icon name="fa-pen"  /></a>
         <a class="hover:bg-red-700 w-1/2 px-4 py-2 rounded-r-xl flex justify-center items-center cursor-pointer"><v-icon name="fa-trash-alt"  /></a>
       </div>
   </div>
@@ -34,10 +34,7 @@ export default {
             return "http://127.0.0.1:8000"+ mediaObject.collection[0].contentUrl;
         }
       },
-      async deleteMovie (id) {
-        await ApiService.deleteMovie(id);
-      },
-      async handleDelete(id) {
+      async deleteMovie(id) {
         if (!this.loggedIn) {
           return (this.$router.push("login"));
         } else {
@@ -55,20 +52,6 @@ export default {
           throw "Error while deleting";
         }
       },
-      deleteFilm(id) {
-            try {
-                // const movieId = '/api/movies/';
-                ApiService.deleteMovie(id);
-                // console.log("film : ", response);
-                console.log(this.film.id);
-                console.log('success 2');
-
-                // this.movie = response.data.movie;
-                // console.log(this.movie);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        },
     },
     props: ['film'],
     computed: {

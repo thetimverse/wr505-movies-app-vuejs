@@ -316,8 +316,23 @@ export default {
         })
     },
     deleteActor (id) {
-        return api('/actors/' + id, {
-            method: 'DELETE'
+        const mutation = `
+        mutation deleteActor(
+            $id: ID!
+          ){
+            deleteActor(input: 
+            {id: $id}){
+              actor {id}
+            }
+          }
+        `;
+
+        return api('/api/graphql/', {
+            method: 'POST',
+            body: JSON.stringify({
+                query: mutation,
+                variables: {id}
+            })
         })
     },
     searchActor (name) {
@@ -377,8 +392,23 @@ export default {
         })
     },
     deleteCategory (id) {
-        return api('/categories/' + id, {
-            method: 'DELETE'
+        const mutation = `
+        mutation deleteCategory(
+            $id: ID!
+          ){
+            deleteCategory(input: 
+            {id: $id}){
+              category {id}
+            }
+          }
+        `;
+
+        return api('/api/graphql/', {
+            method: 'POST',
+            body: JSON.stringify({
+                query: mutation,
+                variables: {id}
+            })
         })
     },
     searchCategories (name) {
