@@ -60,8 +60,23 @@ export default {
         })
     },
     deleteMovie (id) {
-        return api('/api/movies/' + id, {
-            method: 'DELETE'
+        const mutation = `
+        mutation deleteMovie(
+            $id: ID!
+          ){
+            deleteMovie(input: 
+            {id: $id}){
+              movie {id}
+            }
+          }
+        `;
+
+        return api('/api/graphql/', {
+            method: 'POST',
+            body: JSON.stringify({
+                query: mutation,
+                variables: {id}
+            })
         })
     },
     searchMovie (title) {
