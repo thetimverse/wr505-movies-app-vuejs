@@ -1,7 +1,7 @@
 <template>
     <div class="mb-8">
         <form @submit.prevent="">
-            <input type="text" id="search" placeholder="Search" v-model="query">
+            <input type="text" id="search" placeholder="Search" v-model="search" class="text-neutral-700">
         </form>
         
         <div class="mt-2">
@@ -20,7 +20,7 @@
         },
         data() {
             return {
-                query: '',
+                search: '',
                 searchTimer: null
             }
         },

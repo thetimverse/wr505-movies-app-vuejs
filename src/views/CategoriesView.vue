@@ -4,14 +4,11 @@
             <h2 class="text-2xl font-semibold">Categories</h2>
             <button @click="openMovieModal" class="font-semibold bg-violet-800 py-2 px-6 tracking-wide cursor-pointer rounded-lg hover:bg-violet-900 text-white">Add category</button>
         </div>
-        <Search @updatedSearch="query" :totalCount="totalCount"></Search>
+        <Search @updatedSearch="search" :totalCount="totalCount"></Search>
         <MovieModal ref="movieModal"/> 
         <ul class="flex flex-row flex-wrap items-center gap-10">
           <li v-for="category in categories" :key="categories._id" class="bg-neutral-800 px-8 py-4 rounded-lg">
             <h2 class="font-bold text-xl">{{ category.name }}</h2>
-            <!-- <div class="flex flex-row flex-wrap justify-between items-center gap-10 overflow-x-scroll max-md:overflow-scroll">
-                <MovieCard :film="film" v-for="film in category.movies" :key="film._id"></MovieCard>
-            </div> -->
             </li>
         </ul>
         <Pagination
@@ -24,16 +21,14 @@
 
 <script>
 import ApiService from '../api/ApiService';
-import MovieCard from '@/components/MovieCard.vue';
 import MovieModal from "@/components/MovieModal.vue";
 import Search from '@/components/Search.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {
-components: {MovieCard, MovieModal, Search, Pagination},
+components: {MovieModal, Search, Pagination},
 data() {
   return {
-    query: '',
     categories: [],
     films: [],
     totalCount: null,

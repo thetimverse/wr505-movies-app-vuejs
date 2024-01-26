@@ -4,9 +4,9 @@
             <h2 class="text-2xl font-semibold">Movies</h2>
             <button @click="openMovieModal" class="font-semibold bg-violet-800 py-2 px-6 tracking-wide cursor-pointer rounded-lg hover:bg-violet-900 text-white">Add movie</button>
           </div>
-          <Search @updatedSearch="query" :totalCount="totalCount"></Search>
+          <Search @updatedSearch="search" :totalCount="totalCount"></Search>
           <MovieModal ref="movieModal"/> 
-          <div class="flex flex-row flex-wrap justify-between items-center gap-10 max-md:overflow-scroll">
+          <div class="flex flex-row flex-wrap items-center gap-20 w-full justify-items-stretch max-md:overflow-scroll">
             <MovieCard :film="film" v-for="film in this.films" :key="film._id"></MovieCard>
           </div>
           <Pagination
@@ -28,7 +28,6 @@ export default {
     components: {MovieCard, MovieModal, Search, Pagination},
     data() {
       return {
-        query: '',
         films: [],
         totalCount: null,
         variables: 

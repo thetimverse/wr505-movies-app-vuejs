@@ -4,9 +4,9 @@
             <h2 class="text-2xl font-semibold">Actors</h2>
             <button @click="openMovieModal" class="font-semibold bg-violet-800 py-2 px-6 tracking-wide cursor-pointer rounded-lg hover:bg-violet-900 text-white">Add actor</button>
         </div>
-        <Search @updatedSearch="query" :totalCount="totalCount"></Search>
+        <Search @updatedSearch="search" :totalCount="totalCount"></Search>
         <ActorModal ref="movieModal"/> 
-        <div class="flex flex-row justify-between items-center gap-10 flex-wrap">
+        <div class="flex flex-row items-center gap-24 w-full justify-items-stretch flex-wrap">
             <ActorCard :actor="actor" v-for="actor in this.actors" :key="actor._id"></ActorCard>
         </div>
         <Pagination
@@ -27,7 +27,6 @@ export default {
     components: {ActorCard, Pagination, Search, ActorModal},
     data() {
       return {
-        query: '',
         actors: [],
         totalCount: null,
         variables: 
@@ -46,11 +45,6 @@ export default {
         },
     },
     methods: {
-        // async query() {
-        //   if(this.query.length > 3) {
-        //     this.films = await FilmService.search(this.query)
-        //   }
-        // },
         async getActors (variables) {
             this.error = null
             try {
@@ -70,7 +64,9 @@ export default {
             // console.log("open modal")
         },
         search(query) {
-            this.variables.name = query
+            // var searchWord = this.variables.lastname || this.variables.firstname;
+            // searchWord = query
+            this.variables.lastname = query
             this.getActors(this.variables)
         },
         updatePage(page) {
